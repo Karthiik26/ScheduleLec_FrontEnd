@@ -9,7 +9,7 @@ const HomePage = () => {
   const nav = useNavigate();
   
   useEffect(()=>{
-    if (!location.data.name) {
+    if (!location.data) {
       nav('/Email');
     }
   },[])
