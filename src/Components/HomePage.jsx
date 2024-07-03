@@ -7,6 +7,7 @@ const HomePage = () => {
   const location = useLocation();
 
   const nav = useNavigate();
+  
   console.log(location);
   
   // useEffect(()=>{

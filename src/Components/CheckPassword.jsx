@@ -47,7 +47,7 @@ const CheckPassword = () => {
       if (apiResponse?.success) {
         toast.success(apiResponse?.message);
         nav("/", {
-          stateData : apiResponse?.data
+          state : apiResponse?.data
         });
 
         localStorage.setItem("Admin", JSON.parse(apiResponse?.data));
