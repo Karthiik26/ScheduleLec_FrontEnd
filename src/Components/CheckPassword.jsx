@@ -12,12 +12,12 @@ const CheckPassword = () => {
     AdminId: location?.state?._id,
   });
 
-  useEffect(() => {
-    const adminLoggedIn = localStorage.getItem("Admin");
-    if (adminLoggedIn) {
-      nav("/");
-    } 
-  }, [location, nav]);
+  // useEffect(() => {
+  //   const adminLoggedIn = localStorage.getItem("Admin");
+  //   if (adminLoggedIn) {
+  //     nav("/");
+  //   } 
+  // }, [location, nav]);
 
   const HandleInputElement = (e) => {
     const { name, value } = e.target;

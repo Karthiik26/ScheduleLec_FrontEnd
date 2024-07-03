@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import AuthLayout from "../Common/AuthLayout";
 import CheckEmailPhone from "../Components/CheckEmailPhone";
@@ -10,45 +10,31 @@ import Instructor from "../Components/Instructor";
 import Assign from "../Components/Assign";
 import HomePage from "../Components/HomePage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "Email",
-        element: <CheckEmailPhone />,
-      },
-      {
-        path: "Password",
-        element: <CheckPassword />,
-      },
-      {
-        path: "/",
-        element: <AuthLayout><HomePage /></AuthLayout>,
-        children: [
-          {
-            path: "/Dashboard",
-            element: (
-                <Dashboard />
-            ),
-          },
-          {
-            path: "/Courses",
-            element: <Courses />,
-          },
-          {
-            path: "/Instructor",
-            element: <Instructor />,
-          },
-          {
-            path: "/Assign",
-            element: <Assign />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+// Wrapper component to protect routes
+const ProtectedRoute = ({ element: Element, ...rest }) => {
+  const adminLoggedIn = localStorage.getItem("Admin");
+
+  return adminLoggedIn ? (
+    <Element {...rest} />
+  ) : (
+    <Navigate to="/Email" replace state={{ from: rest.path }} />
+  );
+};
+
+const router = createBrowserRouter(
+  <Routes>
+    <Route path="/" element={<App />}>
+      <Route path="Email" element={<CheckEmailPhone />} />
+      <Route path="Password" element={<CheckPassword />} />
+      <Route element={<AuthLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <ProtectedRoute path="Dashboard" element={<Dashboard />} />
+        <ProtectedRoute path="Courses" element={<Courses />} />
+        <ProtectedRoute path="Instructor" element={<Instructor />} />
+        <ProtectedRoute path="Assign" element={<Assign />} />
+      </Route>
+    </Route>
+  </Routes>
+);
 
 export default router;
