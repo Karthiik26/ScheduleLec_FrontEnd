@@ -11,7 +11,7 @@ const HomePage = () => {
   console.log(location);
   
   useEffect(()=>{
-    if (location.state) {
+    if (location.state.email === 'admin@gmail.com') {
       nav('/');
     }else{
       nav('/Email')
