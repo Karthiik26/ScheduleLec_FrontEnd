@@ -33,7 +33,7 @@ const Courses = () => {
 
       if (apires?.success) {
         setFetchingCourse(apires?.data);
-        console.log(FetchingCourse+"ff");
+        // console.log(FetchingCourse+"ff");
       }
     } catch (error) {
       toast.error(error?.message);

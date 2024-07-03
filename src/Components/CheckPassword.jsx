@@ -4,8 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { RiAdminFill } from "react-icons/ri";
 
 const CheckPassword = () => {
-  // const dispatch = useDispatch()
-
+  
   const location = useLocation();
   console.log(location);
 

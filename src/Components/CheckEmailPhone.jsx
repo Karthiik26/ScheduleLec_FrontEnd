@@ -32,7 +32,6 @@ const CheckEmailPhone = () => {
     try {
       console.log("res - > " + URL);
 
-      // Assuming data is a JavaScript object
       const response = await fetch(URL, {
         method: "POST",
         headers: {

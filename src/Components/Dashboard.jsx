@@ -1,6 +1,7 @@
 import React, { useEffect ,useState } from "react";
 import { FaUsers } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
+import { toast } from "react-hot-toast"
 
 const Dashboard = () => {
   useEffect(() => {

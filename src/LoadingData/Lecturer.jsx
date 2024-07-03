@@ -1,38 +1,4 @@
-import { useEffect } from "react";
-
 const LectureCards = ({ FetchingLecture }) => {
-
-
-  // async function Getnames(CoursId, InstructorId) {
-  //   const URL = `${
-  //     import.meta.env.VITE_BACKEND_URL
-  //   }/Schedule/Lecture/GetDataById`;
-
-  //   try {
-  //     const response = await fetch(URL, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body : JSON.stringify({
-  //         courseId: CoursId,
-  //         instructorId : InstructorId
-  //       })
-  //     });
-
-  //     const apires = await response?.json();
-
-  //     console.log(apires);
-
-  //   } catch (error) {
-  //     toast.error(error?.message);
-  //     console.log("error" + error);
-  //   }
-  // } 
-
-  // useEffect(()=>{
-  //   Getnames()
-  // })
 
   console.log(FetchingLecture)
 
@@ -42,11 +8,7 @@ const LectureCards = ({ FetchingLecture }) => {
     const options = {
       year: 'numeric',
       month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: true,
+      day: 'numeric'
     };
   
     return new Intl.DateTimeFormat('en-US', options).format(date);
