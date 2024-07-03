@@ -6,18 +6,7 @@ import { FaBookReader } from "react-icons/fa";
 const HomePage = () => {
   const location = useLocation();
 
-  const nav = useNavigate();
-
-  useEffect(() => {
-    if (location.pathname !== "/") {
-      if (localStorage.getItem("Admin")) {
-        nav("/");
-      }
-    } 
-    if (location.pathname === "/") {
-      nav("/Email");
-    }
-  },[]);
+  // const nav = useNavigate();
 
   const basePath = location.pathname === "/";
 
