@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import AuthLayout from "../Common/AuthLayout";
 import CheckEmailPhone from "../Components/CheckEmailPhone";
@@ -10,35 +10,45 @@ import Instructor from "../Components/Instructor";
 import Assign from "../Components/Assign";
 import HomePage from "../Components/HomePage";
 
-// Wrapper component to protect routes
-const ProtectedRoute = ({ element: Element, ...rest }) => {
-  const adminLoggedIn = localStorage.getItem("Admin");
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "Email",
+        element: <CheckEmailPhone />,
+      },
+      {
+        path: "Password",
+        element: <CheckPassword />,
+      },
+      {
+        path: "/",
+        element: <AuthLayout><HomePage /></AuthLayout>,
+        children: [
+          {
+            path: "/Dashboard",
+            element: (
+                <Dashboard />
+            ),
+          },
+          {
+            path: "/Courses",
+            element: <Courses />,
+          },
+          {
+            path: "/Instructor",
+            element: <Instructor />,
+          },
+          {
+            path: "/Assign",
+            element: <Assign />,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
-  console.log("Admin logged in:", adminLoggedIn);
-
-  return adminLoggedIn ? (
-    <Element {...rest} />
-  ) : (
-    <Navigate to="/Email" replace state={{ from: rest.path }} />
-  );
-};
-
-const AppRouter = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="Email" element={<CheckEmailPhone />} />
-        <Route path="Password" element={<CheckPassword />} />
-        <Route element={<AuthLayout />}>
-          <Route index element={<HomePage />} />
-          <ProtectedRoute path="Dashboard" element={<Dashboard />} />
-          <ProtectedRoute path="Courses" element={<Courses />} />
-          <ProtectedRoute path="Instructor" element={<Instructor />} />
-          <ProtectedRoute path="Assign" element={<Assign />} />
-        </Route>
-      </Route>
-    </Routes>
-  </Router>
-);
-
-export default AppRouter;
+export default router;
