@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import AuthLayout from "../Common/AuthLayout";
 import CheckEmailPhone from "../Components/CheckEmailPhone";
@@ -23,20 +23,22 @@ const ProtectedRoute = ({ element: Element, ...rest }) => {
   );
 };
 
-const router = createBrowserRouter(
-  <Routes>
-    <Route path="/" element={<App />}>
-      <Route path="Email" element={<CheckEmailPhone />} />
-      <Route path="Password" element={<CheckPassword />} />
-      <Route element={<AuthLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <ProtectedRoute path="Dashboard" element={<Dashboard />} />
-        <ProtectedRoute path="Courses" element={<Courses />} />
-        <ProtectedRoute path="Instructor" element={<Instructor />} />
-        <ProtectedRoute path="Assign" element={<Assign />} />
+const AppRouter = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="Email" element={<CheckEmailPhone />} />
+        <Route path="Password" element={<CheckPassword />} />
+        <Route element={<AuthLayout />}>
+          <Route index element={<HomePage />} />
+          <ProtectedRoute path="Dashboard" element={<Dashboard />} />
+          <ProtectedRoute path="Courses" element={<Courses />} />
+          <ProtectedRoute path="Instructor" element={<Instructor />} />
+          <ProtectedRoute path="Assign" element={<Assign />} />
+        </Route>
       </Route>
-    </Route>
-  </Routes>
+    </Routes>
+  </Router>
 );
 
-export default router;
+export default AppRouter;
