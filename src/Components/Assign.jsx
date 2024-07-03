@@ -9,7 +9,7 @@ const Assign = () => {
   const [FetchingLecture, setFetchingLecture] = useState([]);
 
   useEffect(() => {
-    GettingAllData();
+    GettingAllData(); 
   }, [])
 
   const GettingAllData = async () => {
