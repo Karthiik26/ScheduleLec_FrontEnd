@@ -14,6 +14,8 @@ import HomePage from "../Components/HomePage";
 const ProtectedRoute = ({ element: Element, ...rest }) => {
   const adminLoggedIn = localStorage.getItem("Admin");
 
+  console.log("Admin logged in:", adminLoggedIn);
+
   return adminLoggedIn ? (
     <Element {...rest} />
   ) : (
