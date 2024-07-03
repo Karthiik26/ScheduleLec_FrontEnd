@@ -7,12 +7,13 @@ const HomePage = () => {
   const location = useLocation();
 
   const nav = useNavigate();
+  console.log(location);
   
-  // useEffect(()=>{
-  //   if (!location.data) {
-  //     nav('/Email');
-  //   }
-  // },[])
+  useEffect(()=>{
+    if (!location.stateData) {
+      nav('/Email');
+    }
+  },[])
 
   const basePath = location.pathname === "/";
 
