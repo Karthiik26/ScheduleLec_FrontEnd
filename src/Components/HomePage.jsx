@@ -11,10 +11,10 @@ const HomePage = () => {
   console.log(location);
   
   useEffect(()=>{
-    if (location.state.email !== 'admin@gmail.com') {
-      nav('/Email');
+    if (location.state) {
+      nav('/');
     }else{
-      nav('/')
+      nav('/Email')
     }
   },[location])
 

@@ -50,7 +50,7 @@ const CheckPassword = () => {
           state : apiResponse?.data
         });
 
-        localStorage.setItem("Admin", JSON.parse(apiResponse?.data));
+        localStorage.setItem("Admin", JSON.stringify(apiResponse?.data));
       } else {
         toast.error(apiResponse?.message);
       }
