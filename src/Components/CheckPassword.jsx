@@ -13,16 +13,10 @@ const CheckPassword = () => {
   });
 
   useEffect(() => {
-    // Check if admin is already logged in based on localStorage
     const adminLoggedIn = localStorage.getItem("Admin");
-
     if (adminLoggedIn) {
-      // Redirect to home if admin is already logged in
       nav("/");
-    } else if (!location?.state?.name) {
-      // Redirect to Email component if name is not present in location state
-      nav("/Email");
-    }
+    } 
   }, [location, nav]);
 
   const HandleInputElement = (e) => {
