@@ -44,16 +44,18 @@ const CheckPassword = () => {
 
       const apiResponse = await response.json();
 
-      if (apiResponse.success) {
-        toast.success(apiResponse.message);
-        nav("/");
+      if (apiResponse?.success) {
+        toast.success(apiResponse?.message);
+        nav("/", {
+          state : apiResponse?.data
+        });
 
-        localStorage.setItem("Admin", apiResponse.data);
+        localStorage.setItem("Admin", apiResponse?.data);
       } else {
-        toast.error(apiResponse.message);
+        toast.error(apiResponse?.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.message);
     }
   };
 
