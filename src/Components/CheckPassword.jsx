@@ -4,40 +4,39 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { RiAdminFill } from "react-icons/ri";
 
 const CheckPassword = () => {
-  
   const location = useLocation();
-  console.log(location);
-
   const nav = useNavigate();
 
   const [data, setData] = useState({
     password: "",
     AdminId: location?.state?._id,
   });
-  
+
   useEffect(() => {
-    if (!location?.state?.name) {
+    // Check if admin is already logged in based on localStorage
+    const adminLoggedIn = localStorage.getItem("Admin");
+
+    if (adminLoggedIn) {
+      // Redirect to home if admin is already logged in
+      nav("/");
+    } else if (!location?.state?.name) {
+      // Redirect to Email component if name is not present in location state
       nav("/Email");
     }
-  }, [!location?.state?.name]);
+  }, [location, nav]);
 
   const HandleInputElement = (e) => {
     const { name, value } = e.target;
-    setData((Preve) => {
-      return {
-        ...Preve,
-        [name]: value,
-      };
-    });
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    e.stopPropagation();
 
-    const URL = `${
-      import.meta.env.VITE_BACKEND_URL
-    }/Schedule/Lecture/AdminCheckPasswordLogin`;
+    const URL = `${import.meta.env.VITE_BACKEND_URL}/Schedule/Lecture/AdminCheckPasswordLogin`;
 
     try {
       const response = await fetch(URL, {
@@ -49,20 +48,18 @@ const CheckPassword = () => {
         credentials: "include",
       });
 
-      const apires = await response.json();
+      const apiResponse = await response.json();
 
-      if (apires.success) { 
-        toast.success(apires?.message);
+      if (apiResponse.success) {
+        toast.success(apiResponse.message);
         nav("/");
 
-        console.log(apires);
-
-        localStorage.setItem("Admin", apires?.data);
+        localStorage.setItem("Admin", apiResponse.data);
       } else {
-        toast.error(apires?.message);
+        toast.error(apiResponse.message);
       }
     } catch (error) {
-      toast.error(error?.message);
+      toast.error(error.message);
     }
   };
 
@@ -83,9 +80,9 @@ const CheckPassword = () => {
             )}
           </div>
           <div className="grid grid-flow-row">
-            <label htmlFor="password">Password : </label>
+            <label htmlFor="password">Password:</label>
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               value={data.password}
@@ -99,7 +96,7 @@ const CheckPassword = () => {
           <div className="grid grid-flow-row mt-8 mb-5">
             <button
               type="submit"
-              className="text-lg bg-blue-400 text-white hover:bg-blue-300 font-semibold w-auto p-2 rounded-md "
+              className="text-lg bg-blue-400 text-white hover:bg-blue-300 font-semibold w-auto p-2 rounded-md"
             >
               Login
             </button>

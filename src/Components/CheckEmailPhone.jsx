@@ -30,7 +30,6 @@ const CheckEmailPhone = () => {
     const URL = `${import.meta.env.VITE_BACKEND_URL}/Schedule/Lecture/AdminCheckEmail`;
 
     try {
-      console.log("res - > " + URL);
 
       const response = await fetch(URL, {
         method: "POST",
