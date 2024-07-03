@@ -8,11 +8,11 @@ const HomePage = () => {
 
   const nav = useNavigate();
   
-  useEffect(()=>{
-    if (!location.data) {
-      nav('/Email');
-    }
-  },[])
+  // useEffect(()=>{
+  //   if (!location.data) {
+  //     nav('/Email');
+  //   }
+  // },[])
 
   const basePath = location.pathname === "/";
 
