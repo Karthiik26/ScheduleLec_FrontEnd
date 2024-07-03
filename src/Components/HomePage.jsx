@@ -1,10 +1,24 @@
-import React from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../Common/Sidebar";
 import { FaBookReader } from "react-icons/fa";
 
 const HomePage = () => {
   const location = useLocation();
+
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      if (localStorage.getItem("Admin")) {
+        nav("/");
+      }
+    } 
+    if (location.pathname === "/") {
+      nav("/Email");
+    }
+  },[]);
+
   const basePath = location.pathname === "/";
 
   return (

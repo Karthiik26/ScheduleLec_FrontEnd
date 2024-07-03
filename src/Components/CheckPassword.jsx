@@ -14,7 +14,7 @@ const CheckPassword = () => {
     password: "",
     AdminId: location?.state?._id,
   });
-
+  
   useEffect(() => {
     if (!location?.state?.name) {
       nav("/Email");
@@ -51,7 +51,7 @@ const CheckPassword = () => {
 
       const apires = await response.json();
 
-      if (apires.success) {
+      if (apires.success) { 
         toast.success(apires?.message);
         nav("/");
 
